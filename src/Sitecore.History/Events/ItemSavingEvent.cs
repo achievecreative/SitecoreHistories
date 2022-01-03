@@ -6,12 +6,14 @@ using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Events;
+using SitecoreHistory.Models;
+using SitecoreHistory.Services;
 
 namespace SitecoreHistory.Histories
 {
-    public class ItemUpdated
+    public class ItemSavingEvent
     {
-        public ItemUpdated(string ignoreFields)
+        public ItemSavingEvent(string ignoreFields)
         {
             if (!string.IsNullOrEmpty(ignoreFields))
             {
@@ -55,19 +57,11 @@ namespace SitecoreHistory.Histories
 
         private ItemChange GetChagnes(Item orignalItem, Item newItem)
         {
-            var itemChange = new ItemChange()
-            {
-                ID = orignalItem.ID.Guid.ToString("N"),
-                Path = orignalItem.Paths.FullPath,
-                Date = DateTime.Now,
-                Language = newItem.Language.Name,
-                ServerName = Environment.MachineName,
-            };
+            var itemChange = orignalItem.InitialItemHistoryInfo();
 
             if (HttpContext.Current != null)
             {
                 itemChange.UserAgent = HttpContext.Current.Request.UserAgent;
-                itemChange.Editor = HttpContext.Current.User.Identity.Name;
             }
 
             orignalItem.Fields.ReadAll();

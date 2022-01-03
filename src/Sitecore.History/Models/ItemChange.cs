@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SitecoreHistory
+namespace SitecoreHistory.Models
 {
     public class ItemChange
     {
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         public string Path { get; set; }
 
@@ -20,6 +20,12 @@ namespace SitecoreHistory
         public string UserAgent { get; set; }
 
         public string IpAddress { get; set; }
+
+        public string SitecoreVersion { get; set; }
+
+        public string Environment { get; set; }
+
+        public int ItemVersion { get; set; }
 
         public List<FieldChangeDetail> Fields { get; set; }
     }

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
+using Sitecore.Configuration;
 using Sitecore.Diagnostics;
 using Sitecore.Publishing.Pipelines.PublishItem;
+using SitecoreHistory.Models;
+using SitecoreHistory.Services;
 
 namespace SitecoreHistory.Histories
 {
-    public class ItemPublished : PublishItemProcessor
+    public class ItemPublishProcessor : PublishItemProcessor
     {
         public override void Process(PublishItemContext context)
         {
@@ -32,27 +36,26 @@ namespace SitecoreHistory.Histories
                 return;
             }
 
+#if DEBUG
             Log.Info(item.Paths.FullPath, this);
+#endif
 
             if (!ItemChangeService.IsValidToSaveChange(item))
             {
                 return;
             }
 
-            var itemChange = new ItemChange()
+            var itemChange = item.InitialItemHistoryInfo();
+            if (HttpContext.Current != null)
             {
-                Date = DateTime.Now,
-                Editor = context.User.Name,
-                ID = item.ID.Guid.ToString("N"),
-                Path = item.Paths.FullPath,
-                Language = item.Language.Name,
-                ServerName = Environment.MachineName,
-                Fields = new List<FieldChangeDetail>()
+                itemChange.UserAgent = HttpContext.Current.Request.UserAgent;
+            }
+
+            itemChange.Fields = new List<FieldChangeDetail>()
+            {
+                new FieldChangeDetail()
                 {
-                    new FieldChangeDetail()
-                    {
-                        Name = "Publish", NewValue = item.Version.Number.ToString()
-                    }
+                    Name = "Publish", NewValue = item.Version.Number.ToString()
                 }
             };
 

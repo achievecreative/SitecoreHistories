@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HistoryViewer.aspx.cs" Inherits="SitecoreHistory.HistoryViewer" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HistoryViewer.aspx.cs" Inherits="SitecoreHistory.sitecore.admin.HistoryViewer" %>
 
 <!DOCTYPE html>
 <html>

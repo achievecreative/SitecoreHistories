@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SitecoreHistory
+namespace SitecoreHistory.sitecore.admin
 {
 
 

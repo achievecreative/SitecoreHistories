@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace SitecoreHistory
+namespace SitecoreHistory.Models
 {
     [BsonIgnoreExtraElements]
     public class SavedItemChange:ItemChange

@@ -8,8 +8,9 @@ using Newtonsoft.Json;
 using Sitecore.Configuration;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using SitecoreHistory.Models;
 
-namespace SitecoreHistory
+namespace SitecoreHistory.Services
 {
     internal static class ItemChangeService
     {

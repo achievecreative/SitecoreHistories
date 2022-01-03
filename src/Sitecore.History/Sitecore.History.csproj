@@ -73,9 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Histories\ItemPublished.cs" />
-    <Compile Include="FieldChangeDetail.cs" />
-    <Compile Include="ItemChangeService.cs" />
+    <Compile Include="ItemExtensions.cs" />
+    <Compile Include="Processors\ItemPublishProcessor.cs" />
+    <Compile Include="Models\FieldChangeDetail.cs" />
+    <Compile Include="Services\ItemChangeService.cs" />
     <Compile Include="sitecore\admin\HistoryViewer.aspx.cs">
       <DependentUpon>HistoryViewer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -83,10 +84,10 @@
     <Compile Include="sitecore\admin\HistoryViewer.aspx.designer.cs">
       <DependentUpon>HistoryViewer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ItemChange.cs" />
-    <Compile Include="Histories\ItemUpdated.cs" />
+    <Compile Include="Models\ItemChange.cs" />
+    <Compile Include="Events\ItemSavingEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SavedItemChange.cs" />
+    <Compile Include="Models\SavedItemChange.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Include\Custom\Sitecore.History.config" />

@@ -5,8 +5,9 @@ using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using Sitecore.Configuration;
 using Sitecore.sitecore.admin;
+using SitecoreHistory.Models;
 
-namespace SitecoreHistory
+namespace SitecoreHistory.sitecore.admin
 {
     public partial class HistoryViewer : AdminPage
     {
@@ -35,7 +36,7 @@ namespace SitecoreHistory
             var query = collection.AsQueryable<SavedItemChange>();
             if (itemId != Guid.Empty)
             {
-                query = query.Where(x => x.ID == itemId.ToString("N"));
+                query = query.Where(x => x.Id == itemId.ToString("N"));
             }
 
             var mongoQuery = ((MongoQueryable<SavedItemChange>)query).GetMongoQuery();
@@ -44,7 +45,7 @@ namespace SitecoreHistory
 
             results = results.SetSkip(0).SetLimit(50);
 
-            rptHistories.DataSource = results.GroupBy(x => x.ID);
+            rptHistories.DataSource = results.GroupBy(x => x.Id);
             rptHistories.DataBind();
         }
 

@@ -1,4 +1,4 @@
-﻿namespace SitecoreHistory
+﻿namespace SitecoreHistory.Models
 {
     public class FieldChangeDetail
     {
