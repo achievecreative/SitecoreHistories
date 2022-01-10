@@ -42,6 +42,20 @@
             padding: 2px 10px;
             border-radius: 5px;
         }
+        label {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .orignal {
+            background: #B2EBF2;
+            padding: 5px;
+        }
+
+        .update {
+            background: #FFE0B2;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -54,10 +68,14 @@
                 <ItemTemplate>
                     <li>
                         <section>
-                           Item Path:  <label>
-                            <%# GetPath(Container.DataItem) %> </label>
-                          Item ID:   <label>
-                            <%# Eval("Key") %> </label>
+                            <p>
+                                Item ID:   <label>
+                                    <%# Eval("Key") %> </label>
+                            </p>
+                           <p>
+                               Item Path:  <label>
+                                   <%# GetPath(Container.DataItem) %> </label>
+                           </p>
                         </section>
                         <asp:Repeater runat="server" DataSource='<%# Container.DataItem %>'>
                             <HeaderTemplate>
@@ -78,10 +96,10 @@
                                             <li>
                                                 <a class="change-summary" href="javascript:void(0);"><%# GetChange(Container.DataItem) %></a>
                                                 <div class="row" style="display: none">
-                                                    <div class="orignal col-md-6" style="background-color: #B2EBF2">
+                                                    <div class="orignal col-md-6">
                                                         <%# Eval("OldValue") %>
                                                     </div>
-                                                    <div class="update col-md-6" style="background-color: #FFE0B2">
+                                                    <div class="update col-md-6">
                                                         <%# Eval("NewValue") %>
                                                     </div>
                                                 </div>
