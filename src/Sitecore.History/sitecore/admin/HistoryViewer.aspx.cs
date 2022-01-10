@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using Sitecore.Configuration;
 using Sitecore.sitecore.admin;
@@ -29,23 +28,20 @@ namespace SitecoreHistory.sitecore.admin
             Guid.TryParse(Request["Id"], out itemId);
 
             var client = new MongoClient(ConnectionString);
-            var server = client.GetServer();
-            var database = server.GetDatabase(Constants.DatabaseName);
-            var collection = database.GetCollection(Constants.CollectionName);
+            var database = client.GetDatabase(Constants.DatabaseName);
+            var collection = database.GetCollection<SavedItemChange>(Constants.CollectionName);
 
             var query = collection.AsQueryable<SavedItemChange>();
             if (itemId != Guid.Empty)
             {
-                query = query.Where(x => x.Id == itemId.ToString("N"));
+                query = query.Where(x => x.ItemId == itemId.ToString("N"));
             }
 
-            var mongoQuery = ((MongoQueryable<SavedItemChange>)query).GetMongoQuery();
+            IMongoQueryable<SavedItemChange> results = query.OrderByDescending(x => x.Date);
 
-            var results = collection.FindAs<SavedItemChange>(mongoQuery).SetSortOrder(SortBy<SavedItemChange>.Descending(x => x.Date));
+            results = results.Skip(0).Take(50);
 
-            results = results.SetSkip(0).SetLimit(50);
-
-            rptHistories.DataSource = results.GroupBy(x => x.Id);
+            rptHistories.DataSource = results.ToList().GroupBy(x => x.ItemId);
             rptHistories.DataBind();
         }
 

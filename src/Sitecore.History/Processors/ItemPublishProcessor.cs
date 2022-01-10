@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using Sitecore.Configuration;
 using Sitecore.Diagnostics;
 using Sitecore.Publishing.Pipelines.PublishItem;
 using SitecoreHistory.Models;
 using SitecoreHistory.Services;
 
-namespace SitecoreHistory.Histories
+namespace SitecoreHistory.Processors
 {
     public class ItemPublishProcessor : PublishItemProcessor
     {

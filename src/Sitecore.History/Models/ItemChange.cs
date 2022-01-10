@@ -5,7 +5,7 @@ namespace SitecoreHistory.Models
 {
     public class ItemChange
     {
-        public string Id { get; set; }
+        public string ItemId { get; set; }
 
         public string Path { get; set; }
 

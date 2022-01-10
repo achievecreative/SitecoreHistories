@@ -25,7 +25,7 @@ namespace SitecoreHistory.Services
         {
             var debugEnabled = HttpContext.Current?.IsDebuggingEnabled;
 
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 if ((debugEnabled ?? false))
                 {
@@ -37,11 +37,9 @@ namespace SitecoreHistory.Services
                 }
 
                 var client = new MongoClient(ConnectionString);
-                var server = client.GetServer();
-                var db = server.GetDatabase(Constants.DatabaseName);
-                var collection = db.GetCollection(typeof(ItemChange), Constants.CollectionName);
-
-                collection.Insert(typeof(ItemChange), itemChange);
+                var db = client.GetDatabase(Constants.DatabaseName);
+                var collection = db.GetCollection<ItemChange>(Constants.CollectionName);
+                collection.InsertOne(itemChange);
             });
         }
 

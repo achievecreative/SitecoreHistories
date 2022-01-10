@@ -19,14 +19,14 @@ namespace SitecoreHistory
 
             var itemChange = new ItemChange()
             {
-                Id = item.ID.Guid.ToString("N"),
+                ItemId = item.ID.Guid.ToString("N"),
                 Path = item.Paths.FullPath,
                 Date = DateTime.Now,
                 Language = item.Language.Name,
                 ServerName = Environment.MachineName,
                 ItemVersion = item.Version.Number,
-                SitecoreVersion = Settings.GetAppSetting("Item.History.SitecoreVersion"),
-                Environment = Settings.GetAppSetting("Item.History.Environment"),
+                SitecoreVersion = Settings.GetSetting("Item.History.SitecoreVersion"),
+                Environment = Settings.GetSetting("Item.History.Environment"),
                 Editor = Sitecore.Context.User?.LocalName
             };
 

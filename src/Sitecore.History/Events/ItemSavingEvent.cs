@@ -9,7 +9,7 @@ using Sitecore.Events;
 using SitecoreHistory.Models;
 using SitecoreHistory.Services;
 
-namespace SitecoreHistory.Histories
+namespace SitecoreHistory.Events
 {
     public class ItemSavingEvent
     {
